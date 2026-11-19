@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança Cibernética | Sua Jornada Começa Aqui</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            950: '#040914',
+                            900: '#091224',
+                            850: '#0d1930',
+                            800: '#11213d',
+                            700: '#1c3359',
+                            cyan: '#00e5ff',
+                            red: '#e11d48',
+                            redDark: '#be123c'
+                        }
+                    },
+                    boxShadow: {
+                        'cyan-glow': '0 0 20px rgba(0, 229, 255, 0.25)',
+                        'red-glow': '0 0 20px rgba(225, 29, 72, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar & Cyber Grid Background */
+        body {
+            background-color: #040914;
+            color: #f1f5f9;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 229, 255, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(225, 29, 72, 0.06) 0%, transparent 40%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #091224;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1c3359;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00e5ff;
+        }
+
+        .glass-panel {
+            background: rgba(13, 25, 48, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.16);
+        }
+
+        .resource-card {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .resource-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 229, 255, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(0, 229, 255, 0.15);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-slate-950 pb-20 md:pb-0">
+
+    <!-- ==================== HEADER / TOP NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Brand Logo (Clicável e acessível para retornar à tela principal) -->
+                <div 
+                    role="button" 
+                    tabindex="0" 
+                    title="Voltar para a tela principal" 
+                    aria-label="Segurança Cibernética - Voltar para a tela principal"
+                    onclick="returnToHome()" 
+                    onkeydown="handleBrandKeydown(event)"
+                    class="group flex items-center gap-3 cursor-pointer select-none rounded-xl p-1.5 -ml-1.5 transition-all duration-200 hover:bg-slate-800/50 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+                >
+                    <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center shadow-cyan-glow border border-cyan-300/30 transition-transform duration-200 group-hover:scale-105 group-hover:brightness-110">
+                        <i class="fa-solid fa-shield-halved text-white text-lg md:text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-extrabold text-lg md:text-xl tracking-tight text-white transition-colors group-hover:text-cyan-300">Segurança</span>
+                            <span class="bg-cyber-red text-white font-extrabold text-sm md:text-base px-2 py-0.5 rounded-md shadow-red-glow tracking-wide transition-transform duration-200 group-hover:scale-[1.03]">Cibernética</span>
+                        </div>
+                        <p class="text-[11px] md:text-xs text-cyan-400 font-medium hidden sm:block transition-colors group-hover:text-cyan-300">Sua Jornada em Segurança Cibernética Começa Aqui</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-2 bg-cyber-950/70 p-1.5 rounded-xl border border-slate-800">
+                    <button onclick="switchView('hub')" id="nav-desktop-hub" class="nav-btn-desktop px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                        <i class="fa-solid fa-layer-group"></i> Hub de Recursos
+                    </button>
+                    <button onclick="switchView('roadmaps')" id="nav-desktop-roadmaps" class="nav-btn-desktop px-4 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-route"></i> Trilhas de Aprendizado
+                <!-- Quick Progress Badge & Reset Button -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button onclick="toggleFavoritesFilter()" id="header-fav-btn" title="Ver Favoritos" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-amber-400 border border-slate-700/70 transition-all relative">
+                        <i class="fa-solid fa-star"></i>
+                        <span id="fav-count-badge" class="absolute -top-1.5 -right-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                    <div class="flex items-center gap-2 bg-cyber-950/85 px-3 py-1.5 rounded-xl border border-slate-800">
+                        <div class="flex flex-col items-end">
+                            <div class="flex items-center gap-1.5 text-[11px] sm:text-xs">
+                                <span class="text-slate-400 hidden xs:inline">Progresso:</span>
+                                <span id="header-progress-text" class="font-mono font-bold text-cyan-400">0/42 (0%)</span>
+                            </div>
+                            <div class="w-20 sm:w-28 h-1.5 bg-slate-800 rounded-full overflow-hidden mt-1">
+                                <div id="header-progress-bar" class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <button onclick="openResetProgressModal()" title="Zerar Progresso" class="ml-1 px-2.5 py-1.5 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 hover:text-rose-300 border border-rose-500/30 transition-all flex items-center gap-1.5 text-xs font-semibold shrink-0">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span class="hidden lg:inline">Zerar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MOBILE BOTTOM NAVIGATION ==================== -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-panel border-t border-slate-800 px-2 py-2 flex justify-around items-center">
+        <button onclick="switchView('hub')" id="nav-mobile-hub" class="nav-btn-mobile flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl text-cyan-400 bg-cyan-500/10">
+            <i class="fa-solid fa-layer-group text-base"></i>
+            <span class="text-[11px] font-semibold">Recursos</span>
+        </button>
+        <button onclick="switchView('roadmaps')" id="nav-mobile-roadmaps" class="nav-btn-mobile flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl text-slate-400">
+            <i class="fa-solid fa-route text-base"></i>
+            <span class="text-[11px] font-semibold">Trilhas</span>
+        </button>
+        <button onclick="switchView('quiz')" id="nav-mobile-quiz" class="nav-btn-mobile flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl text-slate-400">
+            <i class="fa-solid fa-brain text-base"></i>
+            <span class="text-[11px] font-semibold">Quiz</span>
+        </button>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+
+        <!-- ============================================================ -->
+        <!-- VIEW 1: HUB DE RECURSOS (TELA INICIAL)                       -->
+        <!-- ============================================================ -->
+        <section id="view-hub" class="animate-fade-in space-y-6">
+            
+            <!-- Hero Banner Interativo -->
+            <div class="relative overflow-hidden rounded-2xl glass-panel border border-cyan-500/25 p-6 md:p-8 shadow-2xl">
+                <div class="absolute -right-16 -top-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-cyber-red/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-mono font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                            GUIA INTERATIVO • 8 PILARES • 42 RECURSOS GRATUITOS
+                        </div>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight">
+                            Recursos Gratuitos de <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Segurança</span> <span class="bg-cyber-red text-white px-2.5 py-0.5 rounded-lg inline-block mt-1 sm:mt-0">Cibernética</span>
+                        </h1>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Explore plataformas de ensino, laboratórios práticos, ferramentas essenciais, inteligência de ameaças e comunidades. Clique em qualquer recurso para abrir o <strong>guia detalhado</strong> e acompanhe seu progresso.
+                        </p>
+                        <div class="pt-2 flex flex-wrap gap-3">
+                            <button onclick="switchView('roadmaps')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm shadow-cyan-glow transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-compass"></i> Iniciar Trilha Guiada
+                            </button>
+                            <button onclick="switchView('quiz')" class="px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-600/80 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-amber-400"></i> Testar Conhecimentos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Painel de Progresso do Usuário -->
+                    <div class="bg-cyber-950/90 border border-slate-800 rounded-2xl p-5 lg:w-80 shrink-0 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Seu Progresso Geral</span>
+                            <span id="rank-badge" class="px-2.5 py-0.5 rounded-md bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 text-xs font-bold">Recruta Cyber</span>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-end mb-1.5">
+                                <span id="hero-completed-count" class="text-2xl font-extrabold text-white font-mono">0 <span class="text-sm font-normal text-slate-400">/ 42 concluídos</span></span>
+                                <span id="hero-percentage" class="text-sm font-bold text-cyan-400 font-mono">0%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div id="hero-progress-bar" class="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-cyber-red transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-800/80 text-xs">
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-400 block">Favoritos</span>
+                                <span id="hero-fav-count" class="text-base font-bold text-amber-400 font-mono">0</span>
+                            </div>
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-400 block">Categorias</span>
+                                <span class="text-base font-bold text-emerald-400 font-mono">8 Pilares</span>
+                            </div>
+                        </div>
+                        <button onclick="openResetProgressModal()" class="w-full py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/25 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-trash-can"></i> Zerar Progresso Salvo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de Busca e Filtros -->
+            <div class="glass-panel rounded-2xl p-4 sm:p-5 space-y-4">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <!-- Campo de Busca -->
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            oninput="applyFilters()" 
+                            placeholder="Buscar ferramenta, plataforma, CTF, Linux, Nmap, SOC..." 
+                            class="w-full pl-11 pr-10 py-3 rounded-xl bg-cyber-950/90 border border-slate-700/80 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                        >
+                        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Filtro por Nível -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider shrink-0 hidden sm:inline">Nível:</span>
+                        <select id="level-filter" onchange="applyFilters()" class="px-3.5 py-3 rounded-xl bg-cyber-950/90 border border-slate-700/80 text-sm text-slate-200 focus:outline-none focus:border-cyan-400 cursor-pointer">
+                            <option value="all">Todos os Níveis</option>
+                            <option value="Iniciante">🟢 Iniciante</option>
+                            <option value="Intermediário">🟡 Intermediário</option>
+                            <option value="Avançado/Geral">🔴 Avançado / Geral</option>
+                        </select>
+
+                        <!-- Filtro Status -->
+                        <select id="status-filter" onchange="applyFilters()" class="px-3.5 py-3 rounded-xl bg-cyber-950/90 border border-slate-700/80 text-sm text-slate-200 focus:outline-none focus:border-cyan-400 cursor-pointer">
+                            <option value="all">Todos Status</option>
+                            <option value="favorites">⭐ Favoritos</option>
+                            <option value="completed">✅ Concluídos</option>
+                            <option value="pending">⏳ Não Estudados</option>
+                        </select>
+
+                        <!-- Botão Zerar Progresso na Barra de Filtros -->
+                        <button onclick="openResetProgressModal()" title="Zerar Progresso" class="px-3.5 py-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/30 text-sm font-semibold transition-all flex items-center gap-2 shrink-0">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span class="hidden sm:inline">Zerar Progresso</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pills das 8 Categorias -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-1 pt-1" id="category-pills">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+
+            <!-- Contador de Resultados -->
+            <div class="flex items-center justify-between px-1">
+                <p id="results-counter" class="text-xs sm:text-sm text-slate-400">Exibindo <strong class="text-white">42</strong> recursos em <strong class="text-white">8</strong> categorias</p>
+                <button onclick="resetAllFilters()" id="reset-filters-btn" class="hidden text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-rotate-left"></i> Limpar Filtros
+                </button>
+            </div>
+
+            <!-- Grid das 8 Categorias -->
+            <div id="categories-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Renderizado dinamicamente pelo JS -->
+            </div>
+
+            <!-- Estado Vazio (Caso busca não encontre nada) -->
+            <div id="empty-state" class="hidden glass-panel rounded-2xl p-12 text-center space-y-3">
+                <div class="w-16 h-16 rounded-2xl bg-slate-800/80 text-cyan-400 flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-radar"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Nenhum recurso encontrado</h3>
+                <p class="text-sm text-slate-400 max-w-md mx-auto">Não encontramos ferramentas ou plataformas correspondentes aos filtros atuais. Tente buscar por outro termo ou limpe os filtros.</p>
+                <button onclick="resetAllFilters()" class="mt-2 px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-sm hover:bg-cyan-400 transition-all">
+                    Mostrar Todos os 42 Recursos
+                </button>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 2: TRILHAS DE APRENDIZADO (ROADMAPS)                    -->
+        <!-- ============================================================ -->
+        <section id="view-roadmaps" class="hidden animate-fade-in space-y-6">
+            <div class="glass-panel rounded-2xl p-6 md:p-8 border border-cyan-500/20">
+                <div class="max-w-3xl space-y-2">
+                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">Roteiros Estruturados</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">Trilhas de Aprendizado Passo a Passo</h2>
+                    <p class="text-sm md:text-base text-slate-300">Não sabe por onde começar? Escolha um objetivo profissional abaixo e siga a sequência recomendada utilizando exclusivamente os recursos gratuitos do infográfico.</p>
+                </div>
+
+                <!-- Seletor de Trilhas -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
+                    <button onclick="selectRoadmap('fundamentos')" id="tab-roadmap-fundamentos" class="roadmap-tab p-4 rounded-xl border border-cyan-400 bg-cyan-500/15 text-left transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Trilha Fundamentos</h3>
+                                <p class="text-xs text-cyan-300">Do Zero ao Primeiro Emprego</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button onclick="selectRoadmap('blueteam')" id="tab-roadmap-blueteam" class="roadmap-tab p-4 rounded-xl border border-slate-700/80 bg-cyber-950/60 hover:border-slate-500 text-left transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-shield-virus"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Blue Team & SOC</h3>
+                                <p class="text-xs text-slate-400">Defesa, Monitoramento & Incidentes</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button onclick="selectRoadmap('redteam')" id="tab-roadmap-redteam" class="roadmap-tab p-4 rounded-xl border border-slate-700/80 bg-cyber-950/60 hover:border-slate-500 text-left transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-user-secret"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Red Team & Pentest</h3>
+                                <p class="text-xs text-slate-400">Hacking Ético & Segurança Web</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Conteúdo da Trilha Selecionada -->
+            <div id="roadmap-content" class="space-y-4">
+                <!-- Preenchido via JS -->
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 3: QUIZ INTERATIVO & RECOMENDAÇÃO                       -->
+        <!-- ============================================================ -->
+        <section id="view-quiz" class="hidden animate-fade-in max-w-3xl mx-auto space-y-6">
+            <div class="glass-panel rounded-2xl p-6 md:p-8 border border-cyan-500/25 shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                    <div>
+                        <span class="text-xs font-mono font-bold text-cyan-400 uppercase">Desafio Interativo</span>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-white">Quiz de Ferramentas & Conceitos Cyber</h2>
+                    </div>
+                    <div id="quiz-score-pill" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-mono font-bold text-cyan-300">
+                        Questão 1 / 6
+                    </div>
+                </div>
+
+                <!-- Container Ativo do Quiz -->
+                <div id="quiz-active-area" class="space-y-6">
+                    <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                        <div id="quiz-progress-bar" class="h-full bg-cyan-400 transition-all duration-300" style="width: 16.6%"></div>
+                    </div>
+
+                    <h3 id="quiz-question-text" class="text-lg md:text-xl font-bold text-white leading-snug">
+                        Carregando pergunta...
+                    </h3>
+
+                    <div id="quiz-options-container" class="space-y-3">
+                        <!-- Opções via JS -->
+                    </div>
+
+                    <!-- Feedback Explicativo -->
+                    <div id="quiz-feedback-box" class="hidden p-4 rounded-xl border text-sm space-y-2">
+                        <p id="quiz-feedback-title" class="font-bold"></p>
+                        <p id="quiz-feedback-desc" class="text-slate-300"></p>
+                        <div class="pt-2 flex flex-wrap items-center justify-between gap-2">
+                            <button id="quiz-inspect-resource-btn" class="text-xs font-bold underline text-cyan-300 hover:text-cyan-200">
+                                Ver detalhes deste recurso
+                            </button>
+                            <button onclick="nextQuizQuestion()" class="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-all">
+                                Próxima Pergunta <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultado Final do Quiz -->
+                <div id="quiz-result-area" class="hidden text-center space-y-6 py-4">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mx-auto text-3xl text-white shadow-cyan-glow">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-2xl font-extrabold text-white">Desafio Concluído!</h3>
+                        <p id="quiz-final-score-text" class="text-lg text-cyan-400 font-mono font-bold">Você acertou 0 de 6 questões</p>
+                        <p id="quiz-recommendation-text" class="text-sm text-slate-300 max-w-lg mx-auto"></p>
+                    </div>
+
+                    <div class="bg-cyber-950/90 border border-slate-800 rounded-2xl p-5 text-left space-y-3">
+                        <h4 class="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold">Recursos Recomendados Para Você Agora:</h4>
+                        <div id="quiz-recommended-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <!-- Cards recomendados -->
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-3 pt-2">
+                        <button onclick="restartQuiz()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-600 transition-all">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Refazer Quiz
+                        </button>
+                        <button onclick="switchView('hub')" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-all">
+                            Explorar Todos os Recursos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-slate-800/80 bg-cyber-950/90 py-6 px-4 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+                <span class="font-semibold text-slate-200">Segurança Cibernética</span>
+                <span>• Sua Jornada em Segurança Cibernética Começa Aqui</span>
+            </div>
+            <p class="text-center sm:text-right">Baseado nos 8 pilares essenciais de aprendizado, prática, ferramentas e inteligência de ameaças.</p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL INFORMATIVO DO RECURSO ==================== -->
+    <div id="resource-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-sm animate-fade-in" onclick="closeModalOnBackdrop(event)">
+        <div class="glass-panel border border-cyan-500/40 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <!-- Header do Modal -->
+            <div class="sticky top-0 z-10 bg-cyber-900/95 backdrop-blur-md px-6 py-4 border-b border-slate-800 flex items-start justify-between gap-4">
+                <div class="flex items-center gap-3.5">
+                    <div id="modal-icon-box" class="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-shield"></i>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span id="modal-category-badge" class="text-[11px] font-mono font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">Categoria</span>
+                            <span id="modal-level-badge" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">Iniciante</span>
+                        </div>
+                        <h3 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-white mt-1">Nome do Recurso</h3>
+                    </div>
+                </div>
+                <button onclick="closeResourceModal()" class="p-2 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Corpo Informativo do Modal -->
+            <div class="p-6 space-y-5">
+                <!-- Tagline do Infográfico -->
+                <div class="p-3.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center gap-3">
+                    <i class="fa-solid fa-circle-info text-cyan-400 text-lg shrink-0"></i>
+                    <p id="modal-tagline" class="text-sm font-semibold text-cyan-200">Resumo rápido do infográfico</p>
+                </div>
+
+                <!-- O que é -->
+                <div class="space-y-1.5">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-cyan-400"></i> O que é esta plataforma / ferramenta?
+                    </h4>
+                    <p id="modal-description" class="text-sm sm:text-base text-slate-200 leading-relaxed">
+                        Descrição completa...
+                    </p>
+                </div>
+
+                <!-- O que você vai aprender / fazer -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye text-rose-400"></i> O que você vai aprender e praticar
+                    </h4>
+                    <ul id="modal-learn-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300">
+                        <!-- Preenchido via JS -->
+                    </ul>
+                </div>
+
+                <!-- Dica Prática de Como Começar -->
+                <div class="bg-cyber-950/90 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb"></i> Dica de Como Começar
+                    </h4>
+                    <p id="modal-tip" class="text-sm text-slate-300 leading-relaxed">
+                        Dica prática...
+                    </p>
+                </div>
+
+                <!-- Ações Interativas do Usuário -->
+                <div class="pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <button id="modal-toggle-complete-btn" onclick="toggleCompleteCurrentModal()" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 border">
+                            <i class="fa-solid fa-check-circle"></i> <span>Marcar como Estudado</span>
+                        </button>
+                        <button id="modal-toggle-fav-btn" onclick="toggleFavoriteCurrentModal()" class="px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 border">
+                            <i class="fa-solid fa-star"></i> <span class="hidden sm:inline">Favoritar</span>
+                        </button>
+                    </div>
+
+                    <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-sm shadow-cyan-glow transition-all flex items-center justify-center gap-2">
+                        <span>Acessar Oficial</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL DE CONFIRMAÇÃO: ZERAR PROGRESSO ==================== -->
+    <div id="reset-progress-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in" onclick="closeResetModalOnBackdrop(event)">
+        <div class="glass-panel border border-rose-500/40 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/35 text-rose-400 flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg sm:text-xl font-extrabold text-white">Zerar Progresso?</h3>
+                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">
+                        Tem certeza de que deseja reiniciar todo o seu histórico de recursos estudados? Esta ação retornará seu contador para <strong class="text-cyan-400 font-mono">0/42 (0%)</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Opção de limpar também os favoritos -->
+            <label class="flex items-center gap-3 p-3.5 rounded-xl bg-cyber-950/90 border border-slate-800 hover:border-slate-700 cursor-pointer transition-colors">
+                <input type="checkbox" id="reset-include-favorites" class="w-4 h-4 rounded accent-rose-500 bg-slate-900 border-slate-600 cursor-pointer">
+                <div class="text-xs sm:text-sm">
+                    <span class="font-semibold text-slate-200 block">Limpar também meus favoritos</span>
+                    <span class="text-slate-400 text-xs">Se desmarcado, seus recursos favoritados serão mantidos.</span>
+                </div>
+            </label>
+
+            <div class="flex items-center justify-end gap-3 pt-2 border-t border-slate-800">
+                <button onclick="closeResetProgressModal()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition-all">
+                    Cancelar
+                </button>
+                <button onclick="confirmResetProgress()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-cyber-red hover:from-rose-500 hover:to-rose-600 text-white font-bold text-sm shadow-red-glow transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>Confirmar e Zerar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toast-container" class="fixed bottom-20 md:bottom-6 right-4 z-50 pointer-events-none flex flex-col gap-2"></div>
+
+    <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+    <script>
+        // =========================================================================
+        // 1. BASE DE DADOS COMPLETA (EXATAMENTE AS 8 CATEGORIAS E 42 RECURSOS)
+        // =========================================================================
+        const CATEGORIES = [
+            {
+                id: 'aprender',
+                title: 'Aprender Segurança Cibernética',
+                icon: 'fa-book-open-reader',
+                accent: 'cyan',
+                description: 'Cursos estruturados, trilhas oficiais e certificações fundamentais gratuitas.'
+            },
+            {
+                id: 'laboratorios',
+                title: 'Laboratórios Práticos',
+                icon: 'fa-flask-vial',
+                accent: 'blue',
+                description: 'Ambientes interativos na nuvem para treinar ataque e defesa na prática.'
+            },
+            {
+                id: 'pratica',
+                title: 'Prática e Desafios',
+                icon: 'fa-bullseye',
+                accent: 'rose',
+                description: 'Competições Capture The Flag (CTF), máquinas vulneráveis e desafios reais.'
+            },
+            {
+                id: 'ferramentas',
+                title: 'Ferramentas de Segurança Gratuitas',
+                icon: 'fa-screwdriver-wrench',
+                accent: 'cyan',
+                description: 'Softwares essenciais usados diariamente por analistas de SOC e pentesters.'
+            },
+            {
+                id: 'ameacas',
+                title: 'Inteligência de Ameaças',
+                icon: 'fa-shield-halved',
+                accent: 'indigo',
+                description: 'Bases globais de CVEs, táticas de invasores e análise de malwares.'
+            },
+            {
+                id: 'cheatsheets',
+                title: 'Cheat Sheets e Referência',
+                icon: 'fa-file-code',
+                accent: 'emerald',
+                description: 'Guias de consulta rápida, comandos Linux e listas curadas.'
+            },
+            {
+                id: 'comunidades',
+                title: 'Comunidades e Suporte',
+                icon: 'fa-users',
+                accent: 'sky',
+                description: 'Fóruns, grupos e repositórios para networking e resolução de dúvidas.'
+            },
+            {
+                id: 'governamental',
+                title: 'Fontes Governamentais e Oficiais',
+                icon: 'fa-landmark',
+                accent: 'amber',
+                description: 'Órgãos oficiais de normas técnicas, alertas nacionais e resposta a incidentes.'
+            }
+        ];
+
+        const RESOURCES = [
+            // --- CATEGORIA 1: Aprender Segurança Cibernética (6 itens) ---
+            {
+                id: 'cisco-netacad',
+                category: 'aprender',
+                name: 'Cisco Networking Academy',
+                tagline: 'redes, segurança, Python',
+                level: 'Iniciante',
+                icon: 'fa-network-wired',
+                url: 'https://www.netacad.com/',
+                description: 'Plataforma educacional oficial da Cisco com cursos gratuitos de alta qualidade sobre fundamentos de redes, introdução à cibersegurança, defesa de redes e programação em Python.',
+                learnPoints: [
+                    'Fundamentos de Redes (TCP/IP, Roteamento, Switching)',
+                    'Introdução à Cibersegurança e Criptografia',
+                    'Endpoint Security e Defesa de Redes',
+                    'Programação essencial em Python para automação'
+                ],
+                tip: 'Comece pelo curso gratuito "Introduction to Cybersecurity" e em seguida faça "Networking Basics" para construir uma base sólida.'
+            },
+            {
+                id: 'google-cybersecurity',
+                category: 'aprender',
+                name: 'Google Cybersecurity (Coursera)',
+                tagline: 'fundamentos de segurança cibernética',
+                level: 'Iniciante',
+                icon: 'fa-brands fa-google',
+                url: 'https://www.coursera.org/professional-certificates/google-cybersecurity',
+                description: 'Programa de certificação profissional desenvolvido por especialistas do Google, focado em preparar iniciantes para vagas de nível de entrada como Analista de Segurança Júnior ou SOC Tier 1.',
+                learnPoints: [
+                    'Gestão de riscos, frameworks (NIST) e controles de segurança',
+                    'Segurança de redes, Linux e consultas SQL',
+                    'Detecção e resposta a incidentes com SIEM e IDS',
+                    'Automação de tarefas de segurança com Python'
+                ],
+                tip: 'No Coursera, você pode selecionar a opção "Auditar o curso" (Audit) nos módulos individuais para assistir às aulas gratuitamente.'
+            },
+            {
+                id: 'ibm-skillsbuild',
+                category: 'aprender',
+                name: 'IBM SkillsBuild',
+                tagline: 'segurança cibernética e TI',
+                level: 'Iniciante',
+                icon: 'fa-microchip',
+                url: 'https://skillsbuild.org/',
+                description: 'Iniciativa gratuita da IBM que oferece trilhas de aprendizado estruturadas em cibersegurança, computação em nuvem, inteligência artificial e fundamentos de TI com emissões de badges digitais.',
+                learnPoints: [
+                    'Conceitos fundamentais de cibersegurança corporativa',
+                    'Análise de ameaças, vulnerabilidades e criptografia',
+                    'Governança, conformidade e resposta a incidentes',
+                    'Badges digitais verificáveis para o LinkedIn'
+                ],
+                tip: 'Crie uma conta gratuita e busque pela trilha "Cybersecurity Fundamentals" para conquistar seu primeiro badge oficial da IBM.'
+            },
+            {
+                id: 'microsoft-learn',
+                category: 'aprender',
+                name: 'Microsoft Learn',
+                tagline: 'segurança, nuvem e identidade',
+                level: 'Intermediário',
+                icon: 'fa-brands fa-microsoft',
+                url: 'https://learn.microsoft.com/pt-br/training/security/',
+                description: 'Plataforma oficial e 100% gratuita da Microsoft com documentação interativa, módulos passo a passo e sandboxes gratuitos para aprender segurança em nuvem (Azure), identidade (Entra ID) e SIEM (Microsoft Sentinel).',
+                learnPoints: [
+                    'Gestão de Identidade e Acesso (IAM / Zero Trust)',
+                    'Segurança em Cloud Computing (Microsoft Azure)',
+                    'Operações de SOC com Microsoft Sentinel e Defender',
+                    'Preparação gratuita para certificações SC-900 e SC-200'
+                ],
+                tip: 'Inicie pela trilha "SC-900: Fundamentos de Segurança, Conformidade e Identidade da Microsoft", totalmente traduzida para o português.'
+            },
+            {
+                id: 'nptel',
+                category: 'aprender',
+                name: 'NPTEL',
+                tagline: 'segurança cibernética e hacking ético (IITs)',
+                level: 'Intermediário',
+                icon: 'fa-university',
+                url: 'https://nptel.ac.in/',
+                description: 'Programa educacional criado pelos prestigiosos Institutos Indianos de Tecnologia (IITs), oferecendo cursos universitários completos e gratuitos de ciência da computação, criptografia e hacking ético.',
+                learnPoints: [
+                    'Fundamentos acadêmicos e profundos de Hacking Ético',
+                    'Criptografia aplicada e protocolos seguros',
+                    'Segurança de sistemas operacionais e redes',
+                    'Aulas em vídeo ministradas por professores dos IITs'
+                ],
+                tip: 'Pesquise por "Ethical Hacking" no catálogo do NPTEL para acessar palestras completas sobre exploração, enumeração e defesa.'
+            },
+            {
+                id: 'cybrary',
+                category: 'aprender',
+                name: 'Cybrary (Nível Gratuito)',
+                tagline: 'segurança, SOC, ferramentas e conceitos',
+                level: 'Iniciante',
+                icon: 'fa-shield-cat',
+                url: 'https://www.cybrary.it/',
+                description: 'Uma das maiores plataformas focadas exclusivamente em cibersegurança, oferecendo no plano gratuito cursos introdutórios sobre operações de SOC, mitigação de ameaças e ferramentas de defesa.',
+                learnPoints: [
+                    'Fundamentos de operações de Blue Team e SOC',
+                    'Conceitos essenciais de redes seguras e firewalls',
+                    'Introdução ao gerenciamento de vulnerabilidades',
+                    'Visão geral das principais carreiras em Cyber'
+                ],
+                tip: 'Filtre o catálogo pela tag "Free" para acessar cursos introdutórios gratuitos sem precisar inserir cartão de crédito.'
+            },
+
+            // --- CATEGORIA 2: Laboratórios Práticos (6 itens) ---
+            {
+                id: 'tryhackme',
+                category: 'laboratorios',
+                name: 'TryHackMe',
+                tagline: 'laboratórios guiados e para iniciantes',
+                level: 'Iniciante',
+                icon: 'fa-cloud-bolt',
+                url: 'https://tryhackme.com/',
+                description: 'Plataforma gamificada líder mundial para aprender cibersegurança na prática através do navegador. Oferece salas guiadas passo a passo que ensinam desde Linux básico até pentest e defesa.',
+                learnPoints: [
+                    'Fundamentos de Linux, Windows e Redes na prática',
+                    'Uso guiado de ferramentas como Nmap, Burp Suite e Gobuster',
+                    'Trilhas de Pre-Security, Jr Penetration Tester e SOC Level 1',
+                    'Máquinas virtuais acessíveis direto pelo navegador'
+                ],
+                tip: 'Cadastre-se gratuitamente e complete as salas gratuitas do módulo "Pre-Security" e "Introduction to Cyber Security".'
+            },
+            {
+                id: 'hackthebox',
+                category: 'laboratorios',
+                name: 'Hack The Box',
+                tagline: 'laboratórios de hacking do mundo real',
+                level: 'Avançado/Geral',
+                icon: 'fa-cube',
+                url: 'https://www.hackthebox.com/',
+                description: 'Plataforma avançada de treinamento em cibersegurança que simula infraestruturas corporativas reais, máquinas vulneráveis e cenários de Active Directory para testar habilidades ofensivas e defensivas.',
+                learnPoints: [
+                    'Enumeração avançada e exploração de vulnerabilidades reais',
+                    'Escalação de privilégios em Linux e Windows',
+                    'Ataques e defesa em ambientes Active Directory',
+                    'HTB Academy com módulos teóricos e práticos gratuitos'
+                ],
+                tip: 'Comece pelo tier "Starting Point" (gratuito) no Hack The Box para resolver suas primeiras máquinas com guias oficiais.'
+            },
+            {
+                id: 'letsdefend',
+                category: 'laboratorios',
+                name: 'LetsDefend',
+                tagline: 'laboratórios de SOC e Blue Team',
+                level: 'Intermediário',
+                icon: 'fa-headset',
+                url: 'https://letsdefend.io/',
+                description: 'Simulador realista de um Centro de Operações de Segurança (SOC). Você assume o papel de um analista investigando alertas reais de SIEM, analisando logs, e-mails de phishing e endpoints.',
+                learnPoints: [
+                    'Triagem e investigação de alertas em um SIEM simulado',
+                    'Análise de cabeçalhos de e-mail e phishing malicioso',
+                    'Execução de Playbooks de Resposta a Incidentes',
+                    'Análise de tráfego de rede e comportamento de endpoints'
+                ],
+                tip: 'Use a conta gratuita para investigar os alertas iniciais na fila do SOC e aprender como documentar um incidente.'
+            },
+            {
+                id: 'blueteamlabs',
+                category: 'laboratorios',
+                name: 'Blue Team Labs Online',
+                tagline: 'defesa e resposta a incidentes',
+                level: 'Intermediário',
+                icon: 'fa-shield-virus',
+                url: 'https://blueteamlabs.online/',
+                description: 'Plataforma gamificada focada 100% em defesa cibernética, perícia digital (DFIR), análise de malware, threat hunting e engenharia reversa.',
+                learnPoints: [
+                    'Digital Forensics & Incident Response (DFIR)',
+                    'Análise de memória RAM e discos comprometidos',
+                    'Threat Hunting em logs do Windows e Linux',
+                    'Investigações defensivas baseadas em cenários reais'
+                ],
+                tip: 'Explore a seção "Investigations" filtrando pelos desafios gratuitos de nível Easy para praticar análise forense.'
+            },
+            {
+                id: 'pentesterlab',
+                category: 'laboratorios',
+                name: 'PentesterLab',
+                tagline: 'segurança web e laboratórios de pentesting',
+                level: 'Intermediário',
+                icon: 'fa-vial-circle-check',
+                url: 'https://pentesterlab.com/',
+                description: 'Plataforma especializada em ensinar como identificar e explorar vulnerabilidades em aplicações web através de exercícios práticos focados em falhas reais de código.',
+                learnPoints: [
+                    'Exploração prática de SQL Injection, XSS e CSRF',
+                    'Falhas de autenticação, JWT e desserialização',
+                    'Compreensão profunda de como falhas web ocorrem no código',
+                    'Exercícios gratuitos introdutórios de Pentest Web'
+                ],
+                tip: 'Acesse o "Introduction Badge" gratuito no PentesterLab para praticar as principais falhas web em ambientes isolados.'
+            },
+            {
+                id: 'overthewire',
+                category: 'laboratorios',
+                name: 'OverTheWire',
+                tagline: 'desafios de Linux e segurança',
+                level: 'Iniciante',
+                icon: 'fa-terminal',
+                url: 'https://overthewire.org/wargames/',
+                description: 'Clássica plataforma de Wargames acessada via terminal SSH. É a melhor forma gratuita de dominar a linha de comando do Linux, permissões, criptografia e lógica de segurança.',
+                learnPoints: [
+                    'Domínio total de comandos Linux via SSH',
+                    'Manipulação de arquivos, permissões e variáveis de ambiente',
+                    'Conceitos de criptografia básica, Git e redes no terminal',
+                    'Raciocínio lógico para resolução de problemas'
+                ],
+                tip: 'Comece pelo wargame "Bandit" (níveis 0 a 34). É considerado o rito de passagem obrigatório para iniciantes em segurança.'
+            },
+
+            // --- CATEGORIA 3: Prática e Desafios (5 itens) ---
+            {
+                id: 'picoctf',
+                category: 'pratica',
+                name: 'picoCTF',
+                tagline: 'CTFs do iniciante ao intermediário',
+                level: 'Iniciante',
+                icon: 'fa-flag',
+                url: 'https://picoctf.org/',
+                description: 'Plataforma de Capture The Flag (CTF) criada pela Carnegie Mellon University. Possui centenas de desafios permanentes divididos por categorias, com curva de aprendizado suave.',
+                learnPoints: [
+                    'Criptografia, Esteganografia e Forense Digital',
+                    'Exploração Web (Web Exploitation) e Engenharia Reversa',
+                    'Exploração Binária (Binary Exploitation / Pwn)',
+                    'Ambiente picoGym disponível o ano inteiro para treino'
+                ],
+                tip: 'Acesse o "picoGym" após criar sua conta gratuita e filtre os desafios pelos mais fáceis em General Skills e Web Exploitation.'
+            },
+            {
+                id: 'ctftime',
+                category: 'pratica',
+                name: 'CTFtime',
+                tagline: 'encontre eventos de CTF em andamento',
+                level: 'Avançado/Geral',
+                icon: 'fa-calendar-days',
+                url: 'https://ctftime.org/',
+                description: 'O calendário oficial e ranking mundial de competições Capture The Flag (CTF). Reúne todos os eventos online e presenciais acontecendo no mundo inteiro, além de soluções (write-ups).',
+                learnPoints: [
+                    'Calendário global de competições CTF semanais',
+                    'Acesso a milhares de "Write-ups" (soluções detalhadas)',
+                    'Ranking internacional de equipes e jogadores',
+                    'Oportunidade de participar de torneios reais em equipe'
+                ],
+                tip: 'Mesmo se não competir ao vivo, leia os "Write-ups" de eventos passados no CTFtime para aprender técnicas novas de resolução.'
+            },
+            {
+                id: 'hackthissite',
+                category: 'pratica',
+                name: 'Hack This Site',
+                tagline: 'desafios legais de hacking',
+                level: 'Iniciante',
+                icon: 'fa-skull-crossbones',
+                url: 'https://www.hackthissite.org/',
+                description: 'Uma das comunidades mais antigas e respeitadas de treinamento legal em segurança da informação, oferecendo missões progressivas de hacking web, esteganografia e lógica.',
+                learnPoints: [
+                    'Missões básicas e realistas de segurança web',
+                    'Inspeção de código-fonte HTML/JS e bypass de validações',
+                    'Desafios de esteganografia e quebra de cifras',
+                    'Fórum ativo de discussão sobre segurança ética'
+                ],
+                tip: 'Comece pelas "Basic Missions" para entender como falhas simples de lógica em formulários e scripts são exploradas.'
+            },
+            {
+                id: 'vulnhub',
+                category: 'pratica',
+                name: 'VulnHub',
+                tagline: 'VMs vulneráveis para prática',
+                level: 'Intermediário',
+                icon: 'fa-server',
+                url: 'https://www.vulnhub.com/',
+                description: 'Repositório gratuito de máquinas virtuais (OVAs) intencionalmente vulneráveis que você pode baixar e rodar localmente no VirtualBox ou VMware para praticar pentest offline.',
+                learnPoints: [
+                    'Configuração de laboratório local isolado (Host-Only)',
+                    'Ciclo completo de Pentest: Reconhecimento até Root',
+                    'Exploração de serviços mal configurados em servidores Linux',
+                    'Prática sem depender de conexão com a internet'
+                ],
+                tip: 'Baixe a VM "Kioptrix Level 1" ou "Mr-Robot: 1" no VulnHub e pratique usando seu Kali Linux em rede local.'
+            },
+            {
+                id: 'portswigger-academy',
+                category: 'pratica',
+                name: 'PortSwigger Web Security Academy',
+                tagline: 'segurança web prática',
+                level: 'Intermediário',
+                icon: 'fa-bolt',
+                url: 'https://portswigger.net/web-security',
+                description: 'Criada pelos desenvolvedores do Burp Suite, é considerada a melhor plataforma gratuita do mundo para dominar segurança de aplicações web, com teoria profunda e mais de 250 laboratórios interativos.',
+                learnPoints: [
+                    'SQL Injection, XSS, CSRF, SSRF e XXE na prática',
+                    'Falhas de controle de acesso, CORS e OAuth',
+                    'Laboratórios interativos hospedados gratuitamente na nuvem',
+                    'Preparação direta para a certificação BSCP'
+                ],
+                tip: 'Siga a "Learning Path" oficial da PortSwigger começando pelos tópicos de Server-side e Client-side vulnerabilities.'
+            },
+
+            // --- CATEGORIA 4: Ferramentas de Segurança Gratuitas (6 itens) ---
+            {
+                id: 'kali-linux',
+                category: 'ferramentas',
+                name: 'Kali Linux',
+                tagline: 'sistema operacional de teste de penetração completo',
+                level: 'Intermediário',
+                icon: 'fa-dragon',
+                url: 'https://www.kali.org/',
+                description: 'Distribuição Linux baseada em Debian mantida pela Offensive Security, projetada especificamente para testes de penetração, perícia digital e auditoria de segurança, já vindo com mais de 600 ferramentas pré-instaladas.',
+                learnPoints: [
+                    'Ambiente pronto com Nmap, Metasploit, Wireshark, John, etc.',
+                    'Suporte para VirtualBox, VMware, WSL2 e Live USB',
+                    'Execução de auditorias de rede, wireless e aplicações web',
+                    'Gerenciamento avançado de ferramentas via terminal'
+                ],
+                tip: 'Baixe a imagem pré-construída para VirtualBox ou VMware no site oficial para rodar o Kali com segurança dentro do seu sistema atual.'
+            },
+            {
+                id: 'wireshark',
+                category: 'ferramentas',
+                name: 'Wireshark',
+                tagline: 'análise de tráfego de rede',
+                level: 'Iniciante',
+                icon: 'fa-wave-square',
+                url: 'https://www.wireshark.org/',
+                description: 'O analisador de protocolos de rede mais utilizado no mundo. Permite capturar e inspecionar pacotes trafegando na rede em nível microscópico, essencial para Blue Team, Red Team e engenheiros de rede.',
+                learnPoints: [
+                    'Inspeção detalhada de pacotes TCP, UDP, HTTP, DNS e TLS',
+                    'Filtragem de tráfego suspeito e detecção de anomalias',
+                    'Reconstrução de fluxos de dados (Follow TCP Stream)',
+                    'Análise forense de arquivos de captura (.pcap)'
+                ],
+                tip: 'Aprenda os filtros de exibição básicos como "http", "dns", "ip.addr == x.x.x.x" e "tcp.flags.syn == 1".'
+            },
+            {
+                id: 'nmap',
+                category: 'ferramentas',
+                name: 'Nmap',
+                tagline: 'descoberta e escaneamento de rede',
+                level: 'Iniciante',
+                icon: 'fa-eye',
+                url: 'https://nmap.org/',
+                description: 'Network Mapper (Nmap) é a ferramenta padrão da indústria para descoberta de hosts, mapeamento de topologia de rede, varredura de portas abertas e detecção de versões de serviços e sistemas operacionais.',
+                learnPoints: [
+                    'Descoberta de dispositivos ativos na rede (Host Discovery)',
+                    'Escaneamento de portas TCP/UDP (SYN Scan, Connect Scan)',
+                    'Detecção de versões de serviços (-sV) e SO (-O)',
+                    'Automação de auditoria com Nmap Scripting Engine (NSE)'
+                ],
+                tip: 'Teste o Nmap apenas em redes próprias ou alvos autorizados como "scanme.nmap.org" usando comandos como: nmap -sV -sC scanme.nmap.org.'
+            },
+            {
+                id: 'burp-suite',
+                category: 'ferramentas',
+                name: 'Burp Suite Community',
+                tagline: 'teste de segurança web',
+                level: 'Intermediário',
+                icon: 'fa-spider',
+                url: 'https://portswigger.net/burp/communitydownload',
+                description: 'Proxy interceptador indispensável para testes de segurança em aplicações web. Permite capturar, visualizar, modificar e reenviar requisições HTTP/HTTPS entre o navegador e o servidor.',
+                learnPoints: [
+                    'Interceptação e modificação de requisições HTTP/HTTPS (Proxy)',
+                    'Repetição e manipulação manual de parâmetros (Repeater)',
+                    'Decodificação e análise de tokens/hashes (Decoder)',
+                    'Mapeamento da estrutura de aplicações web'
+                ],
+                tip: 'Use o navegador embutido do Burp Suite ("Open Browser") para interceptar tráfego HTTPS sem precisar configurar certificados manualmente.'
+            },
+            {
+                id: 'metasploit',
+                category: 'ferramentas',
+                name: 'Metasploit (Community)',
+                tagline: 'exploração e teste de segurança',
+                level: 'Avançado/Geral',
+                icon: 'fa-bomb',
+                url: 'https://www.metasploit.com/',
+                description: 'O framework de testes de penetração mais famoso do mundo. Contém um vasto banco de dados de exploits verificados, payloads, módulos auxiliares de reconhecimento e ferramentas pós-exploração.',
+                learnPoints: [
+                    'Busca e configuração de exploits para falhas conhecidas',
+                    'Geração e gerenciamento de payloads e sessões Meterpreter',
+                    'Execução de módulos auxiliares de enumeração',
+                    'Validação controlada de vulnerabilidades em laboratórios'
+                ],
+                tip: 'Pratique os comandos essenciais do msfconsole ("search", "use", "show options", "set RHOSTS", "exploit") em máquinas do TryHackMe.'
+            },
+            {
+                id: 'owasp-zap',
+                category: 'ferramentas',
+                name: 'OWASP ZAP',
+                tagline: 'teste de segurança de aplicações web',
+                level: 'Iniciante',
+                icon: 'fa-bolt-lightning',
+                url: 'https://www.zaproxy.org/',
+                description: 'Zed Attack Proxy (ZAP) é uma ferramenta gratuita e de código aberto mantida pela comunidade de segurança para encontrar automaticamente vulnerabilidades em aplicações web durante o desenvolvimento e testes.',
+                learnPoints: [
+                    'Varredura automatizada (Automated Scan) de aplicações web',
+                    'Spidering para mapear todas as rotas e formulários de um site',
+                    'Proxy interceptador gratuito sem limitações de velocidade',
+                    'Integração em pipelines de DevSecOps (CI/CD)'
+                ],
+                tip: 'Ideal para quem busca uma alternativa 100% open-source e sem restrições de velocidade de fuzzing para testes web.'
+            },
+
+            // --- CATEGORIA 5: Inteligência de Ameaças (5 itens) ---
+            {
+                id: 'cisa',
+                category: 'ameacas',
+                name: 'CISA',
+                tagline: 'alertas, avisos e vulnerabilidades',
+                level: 'Avançado/Geral',
+                icon: 'fa-triangle-exclamation',
+                url: 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog',
+                description: 'Agência de Cibersegurança e Segurança de Infraestrutura dos EUA. Publica alertas críticos em tempo real e mantém o catálogo KEV (Known Exploited Vulnerabilities), listando falhas ativamente exploradas por hackers.',
+                learnPoints: [
+                    'Monitoramento de vulnerabilidades ativamente exploradas (KEV)',
+                    'Alertas oficiais sobre campanhas de ransomware e APTs',
+                    'Guias de mitigação e endurecimento (hardening) de sistemas',
+                    'Priorização inteligente de correções (patches)'
+                ],
+                tip: 'Consulte o catálogo CISA KEV regularmente para saber quais falhas exigem correção imediata no mundo corporativo.'
+            },
+            {
+                id: 'nvd-nist',
+                category: 'ameacas',
+                name: 'NVD (NIST)',
+                tagline: 'base de dados de vulnerabilidades (CVEs)',
+                level: 'Intermediário',
+                icon: 'fa-database',
+                url: 'https://nvd.nist.gov/',
+                description: 'National Vulnerability Database (NVD) é o repositório oficial do governo dos EUA que enriquece os registros de CVE com pontuações de gravidade CVSS, tipos de fraqueza (CWE) e softwares afetados.',
+                learnPoints: [
+                    'Pesquisa técnica de vulnerabilidades por código CVE',
+                    'Interpretação de métricas de severidade CVSS v3.1 / v4.0',
+                    'Identificação de versões exatas de softwares vulneráveis (CPE)',
+                    'Links para patches oficiais e referências técnicas'
+                ],
+                tip: 'Sempre que ouvir falar de uma falha crítica na mídia, pesquise o código CVE na NVD para ler a análise técnica real.'
+            },
+            {
+                id: 'mitre-attack',
+                category: 'ameacas',
+                name: 'MITRE ATT&CK',
+                tagline: 'técnicas e táticas de invasores',
+                level: 'Intermediário',
+                icon: 'fa-chess-board',
+                url: 'https://attack.mitre.org/',
+                description: 'Base de conhecimento globalmente acessível que cataloga as Táticas, Técnicas e Procedimentos (TTPs) reais utilizados por grupos cibercriminosos, desde o acesso inicial até a exfiltração de dados.',
+                learnPoints: [
+                    'Mapeamento das 14 táticas de ataque (Matriz Enterprise)',
+                    'Compreensão de como invasores escalam privilégios e persistem',
+                    'Estratégias de detecção e mitigação para cada técnica',
+                    'Perfis de grupos APT e softwares maliciosos conhecidos'
+                ],
+                tip: 'Explore a matriz Enterprise no site do MITRE ATT&CK e clique em técnicas comuns como "Phishing (T1566)" para ver como detectá-las.'
+            },
+            {
+                id: 'alienvault-otx',
+                category: 'ameacas',
+                name: 'AlienVault OTX',
+                tagline: 'inteligência de ameaças global',
+                level: 'Intermediário',
+                icon: 'fa-satellite-dish',
+                url: 'https://otx.alienvault.com/',
+                description: 'Open Threat Exchange (OTX) é uma das maiores redes abertas de compartilhamento de Threat Intelligence do mundo, onde pesquisadores publicam Indicadores de Comprometimento (IoCs) em tempo real.',
+                learnPoints: [
+                    'Consulta de Indicadores de Comprometimento (IPs, domínios, hashes)',
+                    'Acompanhamento de "Pulses" sobre campanhas recentes de malware',
+                    'Correlação de ameaças globais para equipes de SOC',
+                    'API gratuita para enriquecimento de alertas'
+                ],
+                tip: 'Crie uma conta gratuita para pesquisar se um IP ou hash suspeito já foi reportado pela comunidade global de segurança.'
+            },
+            {
+                id: 'virustotal',
+                category: 'ameacas',
+                name: 'VirusTotal',
+                tagline: 'análise de arquivos, URLs e relatórios de ameaças',
+                level: 'Iniciante',
+                icon: 'fa-virus-slash',
+                url: 'https://www.virustotal.com/',
+                description: 'Serviço gratuito que analisa arquivos suspeitos, URLs, domínios e endereços IP utilizando mais de 70 motores de antivírus simultaneamente, além de exibir comportamento em sandbox.',
+                learnPoints: [
+                    'Verificação rápida de arquivos e links suspeitos sem executá-los',
+                    'Análise comportamental (processos criados, conexões de rede)',
+                    'Consulta de reputação de domínios, IPs e hashes SHA-256',
+                    'Ferramenta essencial no dia a dia de qualquer analista'
+                ],
+                tip: 'Nunca envie documentos confidenciais da sua empresa para o VirusTotal, pois arquivos enviados ficam visíveis para pesquisadores.'
+            },
+
+            // --- CATEGORIA 6: Cheat Sheets e Referência (5 itens) ---
+            {
+                id: 'owasp-cheatsheets',
+                category: 'cheatsheets',
+                name: 'OWASP Cheat Sheets',
+                tagline: 'referências rápidas de segurança web',
+                level: 'Intermediário',
+                icon: 'fa-bug-slash',
+                url: 'https://cheatsheetseries.owasp.org/',
+                description: 'Série de guias concisos e altamente técnicos criados pela comunidade OWASP para ajudar desenvolvedores e engenheiros de segurança a implementar defesas corretas em aplicações web.',
+                learnPoints: [
+                    'Boas práticas de autenticação, sessões e armazenamento de senhas',
+                    'Prevenção definitiva contra SQL Injection, XSS e CSRF',
+                    'Segurança de APIs REST, GraphQL e Docker',
+                    'Checklists diretos de revisão de código seguro'
+                ],
+                tip: 'Salve nos favoritos os guias de "Authentication", "SQL Injection Prevention" e "JSON Web Token (JWT)".'
+            },
+            {
+                id: 'sans-cheatsheets',
+                category: 'cheatsheets',
+                name: 'SANS Cheat Sheets',
+                tagline: 'guias de segurança práticos',
+                level: 'Iniciante',
+                icon: 'fa-file-lines',
+                url: 'https://www.sans.org/posters/',
+                description: 'Coleção lendária de pôsteres e folhas de referência rápida em PDF produzidos pelos instrutores do SANS Institute, cobrindo forense digital, resposta a incidentes, Linux, PowerShell e pentest.',
+                learnPoints: [
+                    'Tabelas de comandos essenciais para DFIR e Threat Hunting',
+                    'Guias visuais de análise de memória e registros do Windows',
+                    'Referências rápidas de TCP/IP, Wireshark e Nmap',
+                    'Materiais gratuitos de altíssimo nível técnico'
+                ],
+                tip: 'Crie uma conta gratuita no portal SANS para baixar os pôsteres em PDF e mantê-los como referência durante seus estudos.'
+            },
+            {
+                id: 'portswigger-cheatsheets',
+                category: 'cheatsheets',
+                name: 'PortSwigger Cheat Sheets',
+                tagline: 'referências de hacking web',
+                level: 'Intermediário',
+                icon: 'fa-code',
+                url: 'https://portswigger.net/web-security/cross-site-scripting/cheat-sheet',
+                description: 'Guias de referência técnica mantidos pela PortSwigger, incluindo a mais completa tabela interativa de payloads de Cross-Site Scripting (XSS) e SQL Injection para testes de aplicações.',
+                learnPoints: [
+                    'Payloads atualizados de XSS para diferentes contextos HTML/JS',
+                    'Sintaxes de SQL Injection para MySQL, PostgreSQL, MSSQL e Oracle',
+                    'Técnicas de bypass de filtros e Web Application Firewalls (WAF)',
+                    'Referência indispensável durante pentests web e CTFs'
+                ],
+                tip: 'Use a XSS Cheat Sheet da PortSwigger sempre que precisar testar quais tags e eventos HTML são permitidos por um filtro.'
+            },
+            {
+                id: 'github-security-awesome',
+                category: 'cheatsheets',
+                name: 'GitHub Security Awesome',
+                tagline: 'recursos de segurança selecionados',
+                level: 'Iniciante',
+                icon: 'fa-brands fa-github',
+                url: 'https://github.com/sbilly/awesome-security',
+                description: 'Repositórios colaborativos no GitHub (como Awesome Security, Awesome Hacking e Awesome SOC) que organizam milhares de ferramentas, livros, blogs e recursos gratuitos por categoria.',
+                learnPoints: [
+                    'Descoberta de ferramentas open-source especializadas',
+                    'Listas curadas para Red Team, Blue Team, Cloud e OSINT',
+                    'Links para livros gratuitos, podcasts e conferências',
+                    'Atualização constante pela comunidade global'
+                ],
+                tip: 'Pesquise no GitHub por "awesome-cybersecurity", "awesome-pentest" ou "awesome-soc" para encontrar listas temáticas.'
+            },
+            {
+                id: 'linux-commands-guide',
+                category: 'cheatsheets',
+                name: 'Guia de Comandos Linux',
+                tagline: 'comandos essenciais para segurança',
+                level: 'Iniciante',
+                icon: 'fa-brands fa-linux',
+                url: 'https://linuxcommand.org/',
+                description: 'Referências essenciais de linha de comando Linux (Bash), manipulação de texto, redes, processos e permissões — a base obrigatória para operar servidores, ferramentas de segurança e analisar logs.',
+                learnPoints: [
+                    'Navegação, busca e manipulação de arquivos (grep, awk, sed, find)',
+                    'Gerenciamento de permissões, usuários e processos (chmod, ps, top)',
+                    'Diagnóstico de rede no terminal (ss, netstat, curl, dig, tcpdump)',
+                    'Automação básica com Shell Script'
+                ],
+                tip: 'Domine a combinação de "grep", "awk", "sort" e "uniq" para filtrar arquivos de log gigantescos em segundos.'
+            },
+
+            // --- CATEGORIA 7: Comunidades e Suporte (5 itens) ---
+            {
+                id: 'reddit-cybersecurity',
+                category: 'comunidades',
+                name: 'Reddit r/cybersecurity',
+                tagline: 'notícias e discussões',
+                level: 'Iniciante',
+                icon: 'fa-brands fa-reddit',
+                url: 'https://www.reddit.com/r/cybersecurity/',
+                description: 'Uma das maiores comunidades online de profissionais e estudantes de segurança da informação. Excelente para acompanhar notícias de última hora, análises de incidentes e dicas de carreira.',
+                learnPoints: [
+                    'Notícias em tempo real sobre vazamentos e novas CVEs',
+                    'Discussões sobre certificações, currículo e mercado de trabalho',
+                    'Debates técnicos entre profissionais experientes da área',
+                    'Subreddits complementares como r/netsec e r/blueteamsec'
+                ],
+                tip: 'Acompanhe também o subreddit r/netsec para artigos técnicos aprofundados e pesquisas de vulnerabilidades.'
+            },
+            {
+                id: 'discord-thm-htb',
+                category: 'comunidades',
+                name: 'Discord (TryHackMe / HTB)',
+                tagline: 'canais de comunidade e laboratórios',
+                level: 'Iniciante',
+                icon: 'fa-brands fa-discord',
+                url: 'https://discord.com/invite/tryhackme',
+                description: 'Servidores oficiais no Discord do TryHackMe e Hack The Box com dezenas de milhares de membros online 24/7 prontos para ajudar em desafios sem dar spoilers diretos.',
+                learnPoints: [
+                    'Ajuda rápida quando você ficar travado em um laboratório',
+                    'Formação de equipes para competir em eventos CTF',
+                    'Canais dedicados em diversos idiomas (incluindo português)',
+                    'Networking direto com criadores de salas e pesquisadores'
+                ],
+                tip: 'Sempre que travar em uma máquina ou desafio, peça uma "dica sem spoiler" (nudge) no canal correspondente do Discord.'
+            },
+            {
+                id: 'stackoverflow',
+                category: 'comunidades',
+                name: 'Stack Overflow',
+                tagline: 'resolução de problemas técnicos',
+                level: 'Iniciante',
+                icon: 'fa-brands fa-stack-overflow',
+                url: 'https://stackoverflow.com/',
+                description: 'Maior plataforma de perguntas e respostas para programadores e profissionais de TI. Indispensável para resolver erros de scripts em Python/Bash, configurar ambientes e entender falhas de código.',
+                learnPoints: [
+                    'Resolução rápida de erros em scripts de automação',
+                    'Compreensão de falhas de programação que geram vulnerabilidades',
+                    'Exemplos práticos de expressões regulares (Regex) e SQL',
+                    'Acesso à comunidade irmão Information Security Stack Exchange'
+                ],
+                tip: 'Conheça também o "security.stackexchange.com", focado especificamente em dúvidas conceituais e técnicas de segurança.'
+            },
+            {
+                id: 'github-security',
+                category: 'comunidades',
+                name: 'GitHub',
+                tagline: 'ferramentas de segurança, scripts e projetos',
+                level: 'Intermediário',
+                icon: 'fa-brands fa-github-alt',
+                url: 'https://github.com/topics/cybersecurity',
+                description: 'O coração do código aberto em cibersegurança. Milhares de ferramentas de pentest, regras de detecção (Sigma/YARA), provas de conceito (PoCs) e scripts de automação são publicados diariamente.',
+                learnPoints: [
+                    'Acesso ao código-fonte das principais ferramentas de segurança',
+                    'Estudo de regras de detecção YARA, Sigma e Snort',
+                    'Criação do seu próprio portfólio com scripts e write-ups',
+                    'Acompanhamento de PoCs de vulnerabilidades recentes'
+                ],
+                tip: 'Crie um repositório no GitHub para documentar seus estudos e soluções de laboratórios — recrutadores valorizam muito!'
+            },
+            {
+                id: 'linkedin-groups',
+                category: 'comunidades',
+                name: 'Grupos do LinkedIn',
+                tagline: 'comunidades de segurança cibernética e SOC',
+                level: 'Iniciante',
+                icon: 'fa-brands fa-linkedin',
+                url: 'https://www.linkedin.com/',
+                description: 'Conexão direta com líderes de segurança (CISOs), analistas de SOC, recrutadores e comunidades brasileiras e globais que compartilham vagas, eventos gratuitos e artigos técnicos.',
+                learnPoints: [
+                    'Networking com profissionais atuantes no mercado brasileiro',
+                    'Acesso a vagas de estágio e analista júnior em Cyber/SOC',
+                    'Compartilhamento de conquistas, badges e projetos práticos',
+                    'Acompanhamento de eventos, webinars e bootcamps gratuitos'
+                ],
+                tip: 'Siga profissionais de Segurança da Informação no Brasil e publique resumos sobre o que você aprendeu nos laboratórios.'
+            },
+
+            // --- CATEGORIA 8: Fontes Governamentais e Oficiais (5 itens) ---
+            {
+                id: 'cert-in',
+                category: 'governamental',
+                name: 'CERT-In',
+                tagline: 'alertas de segurança cibernética (Índia)',
+                level: 'Avançado/Geral',
+                icon: 'fa-bell',
+                url: 'https://www.cert-in.org.in/',
+                description: 'Indian Computer Emergency Response Team — órgão nacional responsável por responder a incidentes de segurança cibernética na Índia, emitindo boletins de vulnerabilidades e alertas técnicos.',
+                learnPoints: [
+                    'Boletins técnicos sobre vulnerabilidades de alta severidade',
+                    'Diretrizes nacionais de resposta a incidentes cibernéticos',
+                    'Alertas preventivos para administradores de sistemas',
+                    'Referência internacional de atuação de um CERT nacional'
+                ],
+                tip: 'No Brasil, o equivalente oficial que cumpre papel semelhante é o CERT.br (cert.br), mantido pelo NIC.br.'
+            },
+            {
+                id: 'meity',
+                category: 'governamental',
+                name: 'MeiTY',
+                tagline: 'iniciativas e recursos de segurança cibernética',
+                level: 'Avançado/Geral',
+                icon: 'fa-building-columns',
+                url: 'https://www.meity.gov.in/',
+                description: 'Ministério de Eletrônica e Tecnologia da Informação da Índia, responsável por formular políticas nacionais de TI, governança digital e programas de conscientização em cibersegurança (Cyber Swachhta Kendra).',
+                learnPoints: [
+                    'Políticas públicas e estratégias de segurança digital',
+                    'Iniciativas de conscientização e higiene cibernética',
+                    'Ferramentas gratuitas de remoção de botnets para cidadãos',
+                    'Frameworks governamentais de proteção digital'
+                ],
+                tip: 'Explore as iniciativas de "Cyber Security" do portal para entender como governos estruturam programas nacionais de defesa digital.'
+            },
+            {
+                id: 'nciipc',
+                category: 'governamental',
+                name: 'NCIIPC',
+                tagline: 'proteção de infraestrutura crítica (Índia)',
+                level: 'Avançado/Geral',
+                icon: 'fa-tower-broadcast',
+                url: 'https://nciipc.gov.in/',
+                description: 'National Critical Information Infrastructure Protection Centre — entidade governamental dedicada à proteção de setores vitais como energia, telecomunicações, bancos e transportes contra ataques cibernéticos.',
+                learnPoints: [
+                    'Conceitos de proteção de Infraestruturas Críticas (ICS/SCADA)',
+                    'Guias de melhores práticas para setores estratégicos',
+                    'Gestão de riscos sistêmicos em redes essenciais',
+                    'Boletins de inteligência focados em infraestrutura'
+                ],
+                tip: 'Ótima leitura para compreender a importância estratégica da segurança cibernética além dos ambientes corporativos comuns.'
+            },
+            {
+                id: 'cybercrime-gov',
+                category: 'governamental',
+                name: 'cybercrime.gov.in',
+                tagline: 'reportar cibercrimes (Índia)',
+                level: 'Iniciante',
+                icon: 'fa-scale-balanced',
+                url: 'https://cybercrime.gov.in/',
+                description: 'Portal nacional oficial para denúncia de crimes cibernéticos, fraudes financeiras online e incidentes digitais, oferecendo também guias de prevenção para cidadãos.',
+                learnPoints: [
+                    'Fluxos oficiais de denúncia e preservação de evidências digitais',
+                    'Manuais educativos sobre prevenção contra golpes online',
+                    'Compreensão legal sobre resposta a crimes cibernéticos',
+                    'Conscientização sobre segurança digital para usuários finais'
+                ],
+                tip: 'Para denúncias no Brasil, utilize a Delegacia Virtual do seu estado ou os canais oficiais da Polícia Federal / SaferNet.'
+            },
+            {
+                id: 'nist',
+                category: 'governamental',
+                name: 'NIST',
+                tagline: 'padrões, diretrizes e publicações de segurança',
+                level: 'Intermediário',
+                icon: 'fa-book-atlas',
+                url: 'https://www.nist.gov/cyberframework',
+                description: 'National Institute of Standards and Technology (EUA). É a principal referência mundial na criação de frameworks, normas técnicas e publicações especiais (NIST SP 800) adotadas por empresas e governos globalmente.',
+                learnPoints: [
+                    'NIST Cybersecurity Framework (CSF 2.0): Govern, Identify, Protect, Detect, Respond, Recover',
+                    'Publicações especiais como NIST SP 800-53 e SP 800-61 (Incident Handling)',
+                    'Padrões oficiais de criptografia e arquitetura Zero Trust',
+                    'Vocabulário e métricas padrão exigidos em entrevistas de Cyber'
+                ],
+                tip: 'Estude as 6 funções principais do NIST CSF 2.0 — esse conhecimento é frequentemente cobrado em entrevistas para Analista de Segurança.'
+            }
+        ];
+
+        // =========================================================================
+        // 2. DADOS DAS TRILHAS DE APRENDIZADO (ROADMAPS)
+        // =========================================================================
+        const ROADMAPS = {
+            fundamentos: {
+                title: 'Trilha Fundamentos: Do Zero ao Primeiro Emprego',
+                subtitle: 'Ideal para iniciantes absolutos construírem base sólida em Redes, Linux e Conceitos de Segurança.',
+                steps: [
+                    {
+                        step: 1,
+                        phase: 'Fase 1 • Base Tecnológica (Semanas 1-3)',
+                        title: 'Redes de Computadores & Linux Essencial',
+                        description: 'Antes de proteger ou testar um sistema, você precisa entender como os dados trafegam e como operar o terminal Linux.',
+                        resourceIds: ['cisco-netacad', 'overthewire', 'linux-commands-guide']
+                    },
+                    {
+                        step: 2,
+                        phase: 'Fase 2 • Fundamentos de Cibersegurança (Semanas 4-7)',
+                        title: 'Conceitos, Governança e Primeiros Laboratórios',
+                        description: 'Aprenda os pilares da segurança, criptografia básica e pratique em laboratórios guiados no navegador.',
+                        resourceIds: ['google-cybersecurity', 'ibm-skillsbuild', 'tryhackme']
+                    },
+                    {
+                        step: 3,
+                        phase: 'Fase 3 • Ferramentas & Comunidade (Semanas 8-10)',
+                        title: 'Análise de Rede, Desafios Iniciantes e Networking',
+                        description: 'Instale suas primeiras ferramentas, resolva CTFs introdutórios e conecte-se com profissionais da área.',
+                        resourceIds: ['wireshark', 'nmap', 'picoctf', 'linkedin-groups']
+                    }
+                ]
+            },
+            blueteam: {
+                title: 'Trilha Blue Team & Analista de SOC',
+                subtitle: 'Focada em defesa cibernética, monitoramento de alertas SIEM, resposta a incidentes e inteligência de ameaças.',
+                steps: [
+                    {
+                        step: 1,
+                        phase: 'Fase 1 • Defesa e Identidade',
+                        title: 'Fundamentos de SOC, Nuvem e Frameworks',
+                        description: 'Domine a estrutura de defesa corporativa, gestão de identidades e os padrões internacionais do NIST.',
+                        resourceIds: ['microsoft-learn', 'cybrary', 'nist']
+                    },
+                    {
+                        step: 2,
+                        phase: 'Fase 2 • Inteligência de Ameaças (CTI)',
+                        title: 'Mapeamento de Invasores e Análise de Artefatos',
+                        description: 'Aprenda a investigar arquivos suspeitos, entender táticas de ataque e monitorar vulnerabilidades críticas.',
+                        resourceIds: ['mitre-attack', 'virustotal', 'nvd-nist', 'cisa']
+                    },
+                    {
+                        step: 3,
+                        phase: 'Fase 3 • Simulação Real de SOC & Forense',
+                        title: 'Triagem de Alertas e Resposta a Incidentes',
+                        description: 'Coloque a mão na massa investigando alertas reais em um SIEM simulado e analisando pacotes de rede.',
+                        resourceIds: ['letsdefend', 'blueteamlabs', 'wireshark', 'sans-cheatsheets']
+                    }
+                ]
+            },
+            redteam: {
+                title: 'Trilha Red Team & Pentest (Hacking Ético)',
+                subtitle: 'Focada em segurança ofensiva, auditoria de aplicações web, enumeração e exploração ética.',
+                steps: [
+                    {
+                        step: 1,
+                        phase: 'Fase 1 • Arsenal Ofensivo',
+                        title: 'Sistema Operacional e Reconhecimento de Rede',
+                        description: 'Configure seu ambiente de pentest e aprenda a mapear serviços e portas ativas com precisão.',
+                        resourceIds: ['kali-linux', 'nmap', 'nptel']
+                    },
+                    {
+                        step: 2,
+                        phase: 'Fase 2 • Especialização em Segurança Web',
+                        title: 'Interceptação HTTP e Exploração de Falhas Web',
+                        description: 'Domine o protocolo HTTP, proxies interceptadores e as principais vulnerabilidades web (OWASP).',
+                        resourceIds: ['portswigger-academy', 'burp-suite', 'owasp-zap', 'owasp-cheatsheets']
+                    },
+                    {
+                        step: 3,
+                        phase: 'Fase 3 • Máquinas Reais & Competições',
+                        title: 'Exploração Completa e Desafios CTF',
+                        description: 'Teste suas habilidades em máquinas vulneráveis realistas e participe de competições internacionais.',
+                        resourceIds: ['hackthebox', 'metasploit', 'vulnhub', 'ctftime']
+                    }
+                ]
+            }
+        };
+
+        // =========================================================================
+        // 3. PERGUNTAS DO QUIZ INTERATIVO
+        // =========================================================================
+        const QUIZ_QUESTIONS = [
+            {
+                question: 'Qual ferramenta gratuita é o padrão da indústria para capturar e inspecionar pacotes de tráfego de rede em tempo real?',
+                options: ['Wireshark', 'Burp Suite Community', 'OverTheWire', 'OWASP ZAP'],
+                correctIndex: 0,
+                explanation: 'O Wireshark permite capturar e analisar pacotes de rede em nível detalhado (TCP, UDP, DNS, HTTP), sendo indispensável para redes e SOC.',
+                resourceId: 'wireshark'
+            },
+            {
+                question: 'Qual plataforma criada pela Carnegie Mellon University é ideal para praticar desafios Capture The Flag (CTF) do nível iniciante ao intermediário?',
+                options: ['NIST', 'picoCTF', 'AlienVault OTX', 'CERT-In'],
+                correctIndex: 1,
+                explanation: 'O picoCTF oferece o ambiente picoGym permanente com centenas de desafios didáticos de criptografia, forense, web e engenharia reversa.',
+                resourceId: 'picoctf'
+            },
+            {
+                question: 'Qual base de conhecimento cataloga as Táticas, Técnicas e Procedimentos (TTPs) reais usados por invasores?',
+                options: ['MITRE ATT&CK', 'Kali Linux', 'Stack Overflow', 'VulnHub'],
+                correctIndex: 0,
+                explanation: 'A matriz MITRE ATT&CK mapeia todo o ciclo de ataque (desde o acesso inicial até a exfiltração) e ajuda equipes de defesa a detectar invasores.',
+                resourceId: 'mitre-attack'
+            },
+            {
+                question: 'Você quer praticar o papel de um Analista de SOC investigando alertas em um SIEM simulado e respondendo a incidentes. Qual laboratório escolher?',
+                options: ['LetsDefend', 'Nmap', 'PortSwigger Cheat Sheets', 'Hacker News'],
+                correctIndex: 0,
+                explanation: 'O LetsDefend simula um Centro de Operações de Segurança (SOC) real, permitindo investigar alertas, logs e executar playbooks.',
+                resourceId: 'letsdefend'
+            },
+            {
+                question: 'Qual plataforma gratuita dos criadores do Burp Suite oferece teoria e mais de 250 laboratórios práticos focados em Segurança Web?',
+                options: ['Cisco Networking Academy', 'PortSwigger Web Security Academy', 'VirusTotal', 'NCIIPC'],
+                correctIndex: 1,
+                explanation: 'A PortSwigger Web Security Academy é referência mundial gratuita para aprender na prática falhas como SQL Injection, XSS, CSRF e SSRF.',
+                resourceId: 'portswigger-academy'
+            },
+            {
+                question: 'Qual wargame clássico acessado via terminal SSH é recomendado para dominar comandos Linux e fundamentos de segurança?',
+                options: ['OverTheWire (Bandit)', 'CISA KEV', 'Microsoft Learn', 'CTFtime'],
+                correctIndex: 0,
+                explanation: 'O wargame Bandit do OverTheWire ensina linha de comando Linux, permissões e lógica de segurança através de níveis progressivos via SSH.',
+                resourceId: 'overthewire'
+            }
+        ];
+
+        // =========================================================================
+        // 4. ESTADO DA APLICAÇÃO & LOCALSTORAGE
+        // =========================================================================
+        let state = {
+            completed: JSON.parse(localStorage.getItem('cyber_completed') || '[]'),
+            favorites: JSON.parse(localStorage.getItem('cyber_favorites') || '[]'),
+            selectedCategory: 'all',
+            currentModalResourceId: null,
+            activeRoadmap: 'fundamentos',
+            quizIndex: 0,
+            quizScore: 0,
+            quizAnswered: false
+        };
+
+        function saveState() {
+            localStorage.setItem('cyber_completed', JSON.stringify(state.completed));
+            localStorage.setItem('cyber_favorites', JSON.stringify(state.favorites));
+            updateProgressUI();
+        }
+
+        // =========================================================================
+        // 5. INICIALIZAÇÃO E RENDERIZAÇÃO DO HUB
+        // =========================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategoryPills();
+            applyFilters();
+            updateProgressUI();
+            selectRoadmap('fundamentos');
+            renderQuizQuestion();
+        });
+
+        function renderCategoryPills() {
+            const container = document.getElementById('category-pills');
+            let html = `
+                <button onclick="selectCategoryFilter('all')" id="pill-all" class="cat-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 bg-cyan-500 text-slate-950 shadow-cyan-glow">
+                    Todas as 8 Categorias
+                </button>
+            `;
+            CATEGORIES.forEach(cat => {
+                html += `
+                    <button onclick="selectCategoryFilter('${cat.id}')" id="pill-${cat.id}" class="cat-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 bg-cyber-950/80 text-slate-300 hover:text-white border border-slate-700/80 flex items-center gap-1.5">
+                        <i class="fa-solid ${cat.icon} text-cyan-400"></i>
+                        <span>${cat.title}</span>
+                    </button>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function selectCategoryFilter(catId) {
+            state.selectedCategory = catId;
+            document.querySelectorAll('.cat-pill').forEach(btn => {
+                btn.className = 'cat-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 bg-cyber-950/80 text-slate-300 hover:text-white border border-slate-700/80 flex items-center gap-1.5';
+            });
+            const activeBtn = document.getElementById(`pill-${catId}`);
+            if (activeBtn) {
+                activeBtn.className = 'cat-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 bg-cyan-500 text-slate-950 shadow-cyan-glow flex items-center gap-1.5';
+            }
+            applyFilters();
+        }
+
+        function toggleFavoritesFilter() {
+            const statusSelect = document.getElementById('status-filter');
+            statusSelect.value = statusSelect.value === 'favorites' ? 'all' : 'favorites';
+            switchView('hub');
+            applyFilters();
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            applyFilters();
+        }
+
+        function resetAllFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('level-filter').value = 'all';
+            document.getElementById('status-filter').value = 'all';
+            selectCategoryFilter('all');
+        }
+
+        function applyFilters() {
+            const searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+            const levelFilter = document.getElementById('level-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+
+            // Mostrar/ocultar botão de limpar busca
+            const clearBtn = document.getElementById('clear-search-btn');
+            if (searchQuery.length > 0) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+
+            // Mostrar/ocultar botão de resetar filtros
+            const isFiltered = searchQuery !== '' || levelFilter !== 'all' || statusFilter !== 'all' || state.selectedCategory !== 'all';
+            const resetBtn = document.getElementById('reset-filters-btn');
+            if (isFiltered) resetBtn.classList.remove('hidden');
+            else resetBtn.classList.add('hidden');
+
+            // Filtrar recursos
+            const filteredResources = RESOURCES.filter(res => {
+                const matchesCat = state.selectedCategory === 'all' || res.category === state.selectedCategory;
+                const matchesLevel = levelFilter === 'all' || res.level === levelFilter;
+                
+                let matchesStatus = true;
+                if (statusFilter === 'favorites') matchesStatus = state.favorites.includes(res.id);
+                if (statusFilter === 'completed') matchesStatus = state.completed.includes(res.id);
+                if (statusFilter === 'pending') matchesStatus = !state.completed.includes(res.id);
+
+                const matchesSearch = searchQuery === '' || 
+                    res.name.toLowerCase().includes(searchQuery) ||
+                    res.tagline.toLowerCase().includes(searchQuery) ||
+                    res.description.toLowerCase().includes(searchQuery) ||
+                    res.learnPoints.some(pt => pt.toLowerCase().includes(searchQuery));
+
+                return matchesCat && matchesLevel && matchesStatus && matchesSearch;
+            });
+
+            renderCategoriesGrid(filteredResources);
+        }
+
+        function renderCategoriesGrid(filteredResources) {
+            const container = document.getElementById('categories-container');
+            const emptyState = document.getElementById('empty-state');
+            const counter = document.getElementById('results-counter');
+
+            if (filteredResources.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                counter.innerHTML = `Exibindo <strong class="text-white">0</strong> recursos`;
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            let html = '';
+            let visibleCategoriesCount = 0;
+
+            CATEGORIES.forEach(cat => {
+                const catItems = filteredResources.filter(r => r.category === cat.id);
+                if (catItems.length === 0) return;
+                visibleCategoriesCount++;
+
+                const completedInCat = catItems.filter(r => state.completed.includes(r.id)).length;
+
+                html += `
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-slate-700/70 flex flex-col shadow-lg">
+                        <!-- Cabeçalho da Categoria (Estilo Infográfico) -->
+                        <div class="bg-gradient-to-r from-cyber-800 via-cyber-850 to-cyber-900 px-5 py-3.5 border-b border-slate-700/80 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center text-base shrink-0">
+                                    <i class="fa-solid ${cat.icon}"></i>
+                                </div>
+                                <div>
+                                    <h2 class="font-bold text-white text-base sm:text-lg leading-tight">${cat.title}</h2>
+                                    <p class="text-[11px] text-slate-400 hidden sm:block">${cat.description}</p>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-950/90 border border-slate-700 text-xs font-mono font-bold text-cyan-300 shrink-0">
+                                ${completedInCat}/${catItems.length}
+                            </span>
+                        </div>
+
+                        <!-- Lista de Recursos da Categoria -->
+                        <div class="p-3.5 sm:p-4 space-y-2.5 flex-1">
+                            ${catItems.map(res => renderResourceRow(res)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            counter.innerHTML = `Exibindo <strong class="text-white">${filteredResources.length}</strong> recursos em <strong class="text-white">${visibleCategoriesCount}</strong> categorias`;
+        }
+
+        function renderResourceRow(res) {
+            const isCompleted = state.completed.includes(res.id);
+            const isFav = state.favorites.includes(res.id);
+
+            const levelColors = {
+                'Iniciante': 'text-emerald-300 bg-emerald-500/10 border-emerald-500/30',
+                'Intermediário': 'text-amber-300 bg-amber-500/10 border-amber-500/30',
+                'Avançado/Geral': 'text-rose-300 bg-rose-500/10 border-rose-500/30'
+            };
+
+            return `
+                <div onclick="openResourceModal('${res.id}')" class="resource-card group cursor-pointer rounded-xl p-3 bg-cyber-950/75 hover:bg-cyber-900 border ${isCompleted ? 'border-emerald-500/40' : 'border-slate-800/90'} flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <!-- Ícone do Recurso -->
+                        <div class="w-9 h-9 rounded-lg ${isCompleted ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-slate-800/90 text-cyan-400 border-slate-700'} border flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition-transform">
+                            <i class="${res.icon.startsWith('fa-brands') ? res.icon : 'fa-solid ' + res.icon}"></i>
+                        </div>
+
+                        <!-- Nome e Tagline do Infográfico -->
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-bold text-sm text-white group-hover:text-cyan-300 transition-colors truncate">${res.name}</h3>
+                                ${isCompleted ? '<i class="fa-solid fa-circle-check text-emerald-400 text-xs shrink-0" title="Concluído"></i>' : ''}
+                                ${isFav ? '<i class="fa-solid fa-star text-amber-400 text-xs shrink-0" title="Favorito"></i>' : ''}
+                            </div>
+                            <p class="text-xs text-slate-400 truncate mt-0.5">${res.tagline}</p>
+                        </div>
+                    </div>
+
+                    <!-- Badge de Nível e Seta -->
+                    <div class="flex items-center gap-2 shrink-0">
+                        <span class="hidden sm:inline-block text-[10px] font-semibold px-2 py-0.5 rounded-md border ${levelColors[res.level]}">
+                            ${res.level}
+                        </span>
+                        <div class="w-7 h-7 rounded-lg bg-slate-800/70 group-hover:bg-cyan-500/20 text-slate-400 group-hover:text-cyan-300 flex items-center justify-center transition-colors">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 6. MODAL INFORMATIVO DETALHADO
+        // =========================================================================
+        function openResourceModal(resourceId) {
+            const res = RESOURCES.find(r => r.id === resourceId);
+            if (!res) return;
+
+            const cat = CATEGORIES.find(c => c.id === res.category);
+            state.currentModalResourceId = resourceId;
+
+            document.getElementById('modal-icon-box').innerHTML = `<i class="${res.icon.startsWith('fa-brands') ? res.icon : 'fa-solid ' + res.icon}"></i>`;
+            document.getElementById('modal-category-badge').textContent = cat ? cat.title : res.category;
+            document.getElementById('modal-level-badge').textContent = res.level;
+            document.getElementById('modal-title').textContent = res.name;
+            document.getElementById('modal-tagline').textContent = `${res.name} — ${res.tagline}`;
+            document.getElementById('modal-description').textContent = res.description;
+            document.getElementById('modal-tip').textContent = res.tip;
+            document.getElementById('modal-external-link').href = res.url;
+
+            const learnList = document.getElementById('modal-learn-list');
+            learnList.innerHTML = res.learnPoints.map(pt => `
+                <li class="flex items-start gap-2 bg-slate-900/70 p-2.5 rounded-lg border border-slate-800/80">
+                    <i class="fa-solid fa-check text-cyan-400 mt-1 text-xs shrink-0"></i>
+                    <span>${pt}</span>
+                </li>
+            `).join('');
+
+            updateModalActionButtons();
+
+            const modal = document.getElementById('resource-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeResourceModal() {
+            const modal = document.getElementById('resource-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+            state.currentModalResourceId = null;
+        }
+
+        function closeModalOnBackdrop(event) {
+            if (event.target.id === 'resource-modal') {
+                closeResourceModal();
+            }
+        }
+
+        // =========================================================================
+        // MODAL & AÇÃO DE ZERAR PROGRESSO
+        // =========================================================================
+        function openResetProgressModal() {
+            const modal = document.getElementById('reset-progress-modal');
+            document.getElementById('reset-include-favorites').checked = false;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeResetProgressModal() {
+            const modal = document.getElementById('reset-progress-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function closeResetModalOnBackdrop(event) {
+            if (event.target.id === 'reset-progress-modal') {
+                closeResetProgressModal();
+            }
+        }
+
+        function confirmResetProgress() {
+            const includeFavorites = document.getElementById('reset-include-favorites').checked;
+
+            state.completed = [];
+            localStorage.removeItem('cyber_completed');
+
+            if (includeFavorites) {
+                state.favorites = [];
+                localStorage.removeItem('cyber_favorites');
+            }
+
+            saveState();
+            applyFilters();
+
+            if (!document.getElementById('view-roadmaps').classList.contains('hidden')) {
+                selectRoadmap(state.activeRoadmap);
+            }
+            if (state.currentModalResourceId) {
+                updateModalActionButtons();
+            }
+
+            closeResetProgressModal();
+            showToast(
+                includeFavorites
+                    ? 'Progresso e favoritos zerados com sucesso (0/42)!'
+                    : 'Progresso zerado com sucesso! Contador reiniciado para 0/42.',
+                'success'
+            );
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeResourceModal();
+                closeResetProgressModal();
+            }
+        });
+
+        function updateModalActionButtons() {
+            const id = state.currentModalResourceId;
+            if (!id) return;
+
+            const isCompleted = state.completed.includes(id);
+            const isFav = state.favorites.includes(id);
+
+            const completeBtn = document.getElementById('modal-toggle-complete-btn');
+            if (isCompleted) {
+                completeBtn.className = 'flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 border bg-emerald-500/20 border-emerald-500/50 text-emerald-300';
+                completeBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> <span>Estudado / Concluído</span>';
+            } else {
+                completeBtn.className = 'flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 border bg-slate-800 hover:bg-slate-700 border-slate-600 text-white';
+                completeBtn.innerHTML = '<i class="fa-regular fa-circle-check"></i> <span>Marcar como Estudado</span>';
+            }
+
+            const favBtn = document.getElementById('modal-toggle-fav-btn');
+            if (isFav) {
+                favBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 border bg-amber-500/20 border-amber-500/50 text-amber-300';
+                favBtn.innerHTML = '<i class="fa-solid fa-star"></i> <span class="hidden sm:inline">Favoritado</span>';
+            } else {
+                favBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 border bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200';
+                favBtn.innerHTML = '<i class="fa-regular fa-star"></i> <span class="hidden sm:inline">Favoritar</span>';
+            }
+        }
+
+        function toggleCompleteCurrentModal() {
+            const id = state.currentModalResourceId;
+            if (!id) return;
+            const res = RESOURCES.find(r => r.id === id);
+
+            if (state.completed.includes(id)) {
+                state.completed = state.completed.filter(item => item !== id);
+                showToast(`"${res.name}" removido dos concluídos.`, 'info');
+            } else {
+                state.completed.push(id);
+                showToast(`Parabéns! "${res.name}" marcado como estudado!`, 'success');
+            }
+
+            saveState();
+            updateModalActionButtons();
+            applyFilters();
+            if (!document.getElementById('view-roadmaps').classList.contains('hidden')) {
+                selectRoadmap(state.activeRoadmap);
+            }
+        }
+
+        function toggleFavoriteCurrentModal() {
+            const id = state.currentModalResourceId;
+            if (!id) return;
+            const res = RESOURCES.find(r => r.id === id);
+
+            if (state.favorites.includes(id)) {
+                state.favorites = state.favorites.filter(item => item !== id);
+                showToast(`"${res.name}" removido dos favoritos.`, 'info');
+            } else {
+                state.favorites.push(id);
+                showToast(`"${res.name}" salvo nos seus favoritos!`, 'warning');
+            }
+
+            saveState();
+            updateModalActionButtons();
+            applyFilters();
+        }
+
+        // =========================================================================
+        // 7. ATUALIZAÇÃO DA BARRA DE PROGRESSO E PATENTES
+        // =========================================================================
+        function updateProgressUI() {
+            const total = RESOURCES.length;
+            const completedCount = state.completed.length;
+            const favCount = state.favorites.length;
+            const pct = Math.round((completedCount / total) * 100);
+
+            document.getElementById('header-progress-text').textContent = `${completedCount}/${total} (${pct}%)`;
+            document.getElementById('header-progress-bar').style.width = `${pct}%`;
+            document.getElementById('fav-count-badge').textContent = favCount;
+
+            document.getElementById('hero-completed-count').innerHTML = `${completedCount} <span class="text-sm font-normal text-slate-400">/ ${total} concluídos</span>`;
+            document.getElementById('hero-percentage').textContent = `${pct}%`;
+            document.getElementById('hero-progress-bar').style.width = `${pct}%`;
+            document.getElementById('hero-fav-count').textContent = favCount;
+
+            // Patente dinâmica baseada no progresso
+            let rank = 'Recruta Cyber';
+            if (completedCount >= 35) rank = 'Mestre CISO';
+            else if (completedCount >= 20) rank = 'Especialista Cyber';
+            else if (completedCount >= 10) rank = 'Analista Júnior';
+            else if (completedCount >= 3) rank = 'Explorador';
+
+            document.getElementById('rank-badge').textContent = rank;
+        }
+
+        // =========================================================================
+        // 8. NAVEGAÇÃO ENTRE TELAS (HUB, TRILHAS, QUIZ)
+        // =========================================================================
+        function returnToHome() {
+            // Fecha qualquer modal que esteja aberto
+            closeResourceModal();
+            closeResetProgressModal();
+
+            // Redefine todos os filtros para exibir a visão principal completa
+            resetAllFilters();
+
+            // Navega para o Hub principal e rola suavemente ao topo
+            switchView('hub');
+        }
+
+        function handleBrandKeydown(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                returnToHome();
+            }
+        }
+
+        function switchView(viewName) {
+            ['hub', 'roadmaps', 'quiz'].forEach(v => {
+                document.getElementById(`view-${v}`).classList.add('hidden');
+                
+                // Desktop Nav
+                const dBtn = document.getElementById(`nav-desktop-${v}`);
+                if (dBtn) {
+                    dBtn.className = 'nav-btn-desktop px-4 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2';
+                }
+
+                // Mobile Nav
+                const mBtn = document.getElementById(`nav-mobile-${v}`);
+                if (mBtn) {
+                    mBtn.className = 'nav-btn-mobile flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl text-slate-400';
+                }
+            });
+
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+            const activeDesktop = document.getElementById(`nav-desktop-${viewName}`);
+            if (activeDesktop) {
+                activeDesktop.className = 'nav-btn-desktop px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+            }
+
+            const activeMobile = document.getElementById(`nav-mobile-${viewName}`);
+            if (activeMobile) {
+                activeMobile.className = 'nav-btn-mobile flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl text-cyan-400 bg-cyan-500/10';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // =========================================================================
+        // 9. LÓGICA DAS TRILHAS DE APRENDIZADO (ROADMAPS)
+        // =========================================================================
+        function selectRoadmap(roadmapKey) {
+            state.activeRoadmap = roadmapKey;
+            const data = ROADMAPS[roadmapKey];
+
+            // Atualizar abas
+            ['fundamentos', 'blueteam', 'redteam'].forEach(key => {
+                const tab = document.getElementById(`tab-roadmap-${key}`);
+                if (key === roadmapKey) {
+                    tab.className = 'roadmap-tab p-4 rounded-xl border border-cyan-400 bg-cyan-500/15 text-left transition-all shadow-cyan-glow';
+                } else {
+                    tab.className = 'roadmap-tab p-4 rounded-xl border border-slate-700/80 bg-cyber-950/60 hover:border-slate-500 text-left transition-all';
+                }
+            });
+
+            const container = document.getElementById('roadmap-content');
+            let html = `
+                <div class="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-800">
+                    <h3 class="text-xl font-extrabold text-white">${data.title}</h3>
+                    <p class="text-sm text-slate-400 mt-1">${data.subtitle}</p>
+                </div>
+            `;
+
+            data.steps.forEach(stepObj => {
+                const stepResources = stepObj.resourceIds.map(id => RESOURCES.find(r => r.id === id)).filter(Boolean);
+                const doneCount = stepResources.filter(r => state.completed.includes(r.id)).length;
+
+                html += `
+                    <div class="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-700/80 relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-800">
+                            <div>
+                                <span class="text-xs font-mono font-bold text-cyan-400 uppercase">${stepObj.phase}</span>
+                                <h4 class="text-lg font-bold text-white mt-0.5">Passo ${stepObj.step}: ${stepObj.title}</h4>
+                            </div>
+                            <span class="px-3 py-1 rounded-lg bg-cyber-950 border border-slate-700 text-xs font-mono font-bold text-emerald-400 self-start sm:self-center">
+                                ${doneCount}/${stepResources.length} concluídos
+                            </span>
+                        </div>
+                        <p class="text-sm text-slate-300 mt-3 mb-4">${stepObj.description}</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${stepResources.map(res => renderResourceRow(res)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // =========================================================================
+        // 10. LÓGICA DO QUIZ INTERATIVO
+        // =========================================================================
+        function renderQuizQuestion() {
+            const q = QUIZ_QUESTIONS[state.quizIndex];
+            state.quizAnswered = false;
+
+            document.getElementById('quiz-score-pill').textContent = `Questão ${state.quizIndex + 1} / ${QUIZ_QUESTIONS.length}`;
+            document.getElementById('quiz-progress-bar').style.width = `${((state.quizIndex + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+            document.getElementById('quiz-question-text').textContent = q.question;
+            document.getElementById('quiz-feedback-box').classList.add('hidden');
+
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = q.options.map((opt, idx) => `
+                <button onclick="submitQuizAnswer(${idx})" id="quiz-opt-${idx}" class="w-full text-left p-4 rounded-xl bg-cyber-950/90 hover:bg-cyber-800 border border-slate-700/80 hover:border-cyan-400 text-sm sm:text-base font-medium text-slate-200 transition-all flex items-center gap-3">
+                    <span class="w-7 h-7 rounded-lg bg-slate-800 text-cyan-300 font-mono font-bold text-xs flex items-center justify-center shrink-0">
+                        ${String.fromCharCode(65 + idx)}
+                    </span>
+                    <span>${opt}</span>
+                </button>
+            `).join('');
+        }
+
+        function submitQuizAnswer(selectedIndex) {
+            if (state.quizAnswered) return;
+            state.quizAnswered = true;
+
+            const q = QUIZ_QUESTIONS[state.quizIndex];
+            const isCorrect = selectedIndex === q.correctIndex;
+            if (isCorrect) state.quizScore++;
+
+            // Estilizar botões
+            q.options.forEach((_, idx) => {
+                const btn = document.getElementById(`quiz-opt-${idx}`);
+                btn.disabled = true;
+                if (idx === q.correctIndex) {
+                    btn.className = 'w-full text-left p-4 rounded-xl bg-emerald-500/20 border border-emerald-500 text-sm sm:text-base font-bold text-emerald-200 flex items-center gap-3';
+                } else if (idx === selectedIndex && !isCorrect) {
+                    btn.className = 'w-full text-left p-4 rounded-xl bg-rose-500/20 border border-rose-500 text-sm sm:text-base font-bold text-rose-200 flex items-center gap-3';
+                } else {
+                    btn.className = 'w-full text-left p-4 rounded-xl bg-cyber-950/50 border border-slate-800 text-sm sm:text-base text-slate-500 flex items-center gap-3';
+                }
+            });
+
+            // Mostrar Feedback
+            const fbBox = document.getElementById('quiz-feedback-box');
+            const fbTitle = document.getElementById('quiz-feedback-title');
+            const fbDesc = document.getElementById('quiz-feedback-desc');
+            const inspectBtn = document.getElementById('quiz-inspect-resource-btn');
+
+            fbBox.classList.remove('hidden');
+            if (isCorrect) {
+                fbBox.className = 'p-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-sm space-y-2 animate-fade-in';
+                fbTitle.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> Resposta Correta!';
+                fbTitle.className = 'font-bold text-emerald-300';
+            } else {
+                fbBox.className = 'p-4 rounded-xl border border-rose-500/40 bg-rose-500/10 text-sm space-y-2 animate-fade-in';
+                fbTitle.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400 mr-1.5"></i> Não foi dessa vez! A resposta certa é: ${q.options[q.correctIndex]}`;
+                fbTitle.className = 'font-bold text-rose-300';
+            }
+
+            fbDesc.textContent = q.explanation;
+            inspectBtn.onclick = () => openResourceModal(q.resourceId);
+        }
+
+        function nextQuizQuestion() {
+            if (state.quizIndex + 1 < QUIZ_QUESTIONS.length) {
+                state.quizIndex++;
+                renderQuizQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-active-area').classList.add('hidden');
+            document.getElementById('quiz-result-area').classList.remove('hidden');
+            document.getElementById('quiz-score-pill').textContent = 'Concluído';
+
+            const total = QUIZ_QUESTIONS.length;
+            document.getElementById('quiz-final-score-text').textContent = `Você acertou ${state.quizScore} de ${total} questões!`;
+
+            let recMessage = '';
+            let recIds = [];
+            if (state.quizScore <= 2) {
+                recMessage = 'Você está dando os primeiros passos na área! Recomendamos começar pelos cursos de base e laboratórios guiados para iniciantes.';
+                recIds = ['cisco-netacad', 'google-cybersecurity', 'tryhackme', 'overthewire'];
+            } else if (state.quizScore <= 4) {
+                recMessage = 'Ótimo conhecimento intermediário! Você já conhece as principais ferramentas. Hora de praticar em laboratórios de SOC e Web Security.';
+                recIds = ['letsdefend', 'portswigger-academy', 'wireshark', 'mitre-attack'];
+            } else {
+                recMessage = 'Excelente domínio dos conceitos e ferramentas de Segurança Cibernética! Desafie-se agora em cenários reais e competições CTF.';
+                recIds = ['hackthebox', 'ctftime', 'blueteamlabs', 'nist'];
+            }
+
+            document.getElementById('quiz-recommendation-text').textContent = recMessage;
+            const recCards = recIds.map(id => RESOURCES.find(r => r.id === id)).filter(Boolean);
+            document.getElementById('quiz-recommended-cards').innerHTML = recCards.map(res => renderResourceRow(res)).join('');
+        }
+
+        function restartQuiz() {
+            state.quizIndex = 0;
+            state.quizScore = 0;
+            document.getElementById('quiz-result-area').classList.add('hidden');
+            document.getElementById('quiz-active-area').classList.remove('hidden');
+            renderQuizQuestion();
+        }
+
+        // =========================================================================
+        // 11. NOTIFICAÇÃO TOAST
+        // =========================================================================
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const styles = {
+                success: 'bg-emerald-950/95 border-emerald-500/60 text-emerald-200',
+                warning: 'bg-amber-950/95 border-amber-500/60 text-amber-200',
+                info: 'bg-slate-900/95 border-cyan-500/50 text-cyan-200'
+            };
+
+            const icons = {
+                success: 'fa-circle-check text-emerald-400',
+                warning: 'fa-star text-amber-400',
+                info: 'fa-circle-info text-cyan-400'
+            };
+
+            toast.className = `px-4 py-3 rounded-xl border shadow-xl backdrop-blur-md text-xs sm:text-sm font-semibold flex items-center gap-2.5 animate-fade-in ${styles[type]}`;
+            toast.innerHTML = `<i class="fa-solid ${icons[type]}"></i><span>${message}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 2800);
+        }
+    </script>
+</body>
+</html>
